@@ -23,9 +23,7 @@ public class MapManager : IDisposable
         _mapSpecifics = (MapSpecific)typeof(MapSpecifics).GetField(ServiceLocator.Get<SceneManager>().CurrentScene.LevelId).GetValue(null);
 
         //Initialisation de la grille
-        Grid.GridSizeInBlocks = _mapSpecifics.GridSizeInBlocks;
-        Grid.GridSizeInCells = Grid.GridSizeInBlocks * CellsBlocksDefinition.BlockSizeInCells;
-        Grid.CellSize = 64;
+        Grid.InitGridParameters(_mapSpecifics.GridSizeInBlocks, 64);
 
         //Souscription à l'event du beat
         ServiceLocator.Get<AudioManager>().OnBeat += OnBeat;
@@ -84,24 +82,15 @@ public class MapManager : IDisposable
 
     public void Draw()
     {
-        //Grid
-        if (ServiceLocator.Get<SceneManager>().CurrentScene.DebugMode)
-            for (int lCptY = 0; lCptY < Grid.GridSizeInCells.Y; lCptY++)
-            {
-                for (int lCptX = 0; lCptX < Grid.GridSizeInCells.Y; lCptX++)
-                {
-                    Vector2 lCellPos = new Vector2(lCptX * Grid.CellSize, lCptY * Grid.CellSize);
-                    DrawRectangleLinesEx(new Rectangle(lCellPos.X, lCellPos.Y, CellDefinition.Tilesize.X, CellDefinition.Tilesize.Y), 2, Color.Green);
-                }
-            }
-
         //Contours blocks en dessous
         for (int lCptY = 0; lCptY < _cellsBlocks.GetLength(0); lCptY++)
         {
             for (int lCptX = 0; lCptX < _cellsBlocks.GetLength(1); lCptX++)
             {
                 Vector2 lBlockPos = new Vector2(lCptX * CellsBlocksDefinition.BlockSizeInCells.X, lCptY * CellsBlocksDefinition.BlockSizeInCells.Y) * Grid.CellSize;
-                DrawTexturePro(CellDefinition.TileSheet, CellsBlocksDefinition.BlockFrameDownRectTex,
+                Rectangle vCadreTexture = (_cellsBlocks[lCptY, lCptX].IsFixed && _cellsBlocks[lCptY, lCptX].TypeId == 13) ? CellsBlocksDefinition.BrokenBlockFrameDownRectTex
+                    : CellsBlocksDefinition.BlockFrameDownRectTex;
+                DrawTexturePro(CellDefinition.TileSheet, vCadreTexture,
                     new Rectangle(lBlockPos, Vector2.One * Grid.CellSize * CellsBlocksDefinition.BlockSizeInCells),
                     Vector2.Zero, 0, Color.White);
             }
@@ -144,7 +133,9 @@ public class MapManager : IDisposable
 
                 //Contour block
                 Vector2 lBlockPos = new Vector2(lCptX * CellsBlocksDefinition.BlockSizeInCells.X, lCptY * CellsBlocksDefinition.BlockSizeInCells.Y) * Grid.CellSize;
-                DrawTexturePro(CellDefinition.TileSheet, CellsBlocksDefinition.BlockFrameUpRectTex,
+                Rectangle vCadreTexture = (_cellsBlocks[lCptY, lCptX].IsFixed && _cellsBlocks[lCptY, lCptX].TypeId == 13) ? CellsBlocksDefinition.BrokenBlockFrameUpRectTex
+                    : CellsBlocksDefinition.BlockFrameUpRectTex;
+                DrawTexturePro(CellDefinition.TileSheet, vCadreTexture,
                     new Rectangle(lBlockPos - Vector2.UnitY * Grid.CellSize, CellsBlocksDefinition.BlockFrameUpRectTex.Size),
                     Vector2.Zero, 0, Color.White);
             }
@@ -271,7 +262,7 @@ public class MapManager : IDisposable
             _beatWaited = 0;
             //On applique l'effet de la cellule sur laquelle se trouve le joueur
             Player vPlayer = ServiceLocator.Get<PlayerManager>().Player;
-            if(!vPlayer.IsBlocked)ApplyCellEffect(vPlayer.CurrentCell);
+            if (!vPlayer.IsBlocked) ApplyCellEffect(vPlayer.CurrentCell);
             _previewAlpha = 1;
         }
     }
@@ -421,6 +412,14 @@ public static class Grid
     public static Vector2 GridSizeInCells;
     public static float CellSize;
 
+    public static void InitGridParameters(Vector2 pGridSizeInBlocks, float pCellSize)
+    {
+        GridSizeInBlocks = pGridSizeInBlocks;
+        GridSizeInCells = GridSizeInBlocks * CellsBlocksDefinition.BlockSizeInCells;
+        CellSize = pCellSize;
+    }
+
+
     public static Vector2 GetCellPosition(Vector2 pCell)
     {
         pCell = Tools.FloorVector2(pCell);
@@ -452,27 +451,8 @@ public static class Grid
 
     public static bool IsCellInGrid(Vector2 pCell)
     {
-        return (int)pCell.Y >= 0 && (int)pCell.Y < Grid.GridSizeInCells.Y && (int)pCell.X >= 0 && (int)pCell.X < Grid.GridSizeInCells.X;
+        bool vIsInCell = (int)pCell.Y >= 0 && (int)pCell.Y < GridSizeInCells.Y && (int)pCell.X >= 0 && (int)pCell.X < GridSizeInCells.X;
+        return vIsInCell;
     }
 
-}
-
-public struct Tilemap
-{
-    public float TileSize;
-    public Vector2 _tileMapsizeInTiles;
-    public Vector2 _tileMapsizeInPx;
-    public int[,] MapPattern;
-    public Vector2 Position;
-
-    public Tilemap(int[,] pMapPattern, float pTileSize, Vector2 pPosition)
-    {
-        MapPattern = pMapPattern;
-        TileSize = pTileSize;
-
-        _tileMapsizeInTiles = new Vector2(MapPattern.GetLength(0), MapPattern.GetLength(1));
-        _tileMapsizeInPx = _tileMapsizeInTiles * TileSize;
-
-        Position = pPosition;
-    }
 }

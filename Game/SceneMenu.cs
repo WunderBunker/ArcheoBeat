@@ -12,9 +12,11 @@ public class SceneMenu : Scene
     Texture2D _rock;
     Rectangle _rockRect;
     Rectangle _rockRectLayout;
+    Sprite _rockLightsAnim;
 
     Texture2D _littleRock;
     Rectangle _littleRockRect;
+    Sprite _littleRockLightsAnim;
 
     Button _volumeButton;
     VolumeMenu _volumeMenu;
@@ -63,7 +65,6 @@ public class SceneMenu : Scene
         //Souscription aux évènhement de click
         ServiceLocator.Get<InputController>().Click += OnClick;
         ServiceLocator.Get<InputController>().UnClick += OnUnClick;
-
     }
 
     public override void UnLoad()
@@ -78,11 +79,11 @@ public class SceneMenu : Scene
     {
         base.Update();
 
-        if (_volumeMenu != null)
-        {
-            _volumeMenu?.Update();
-            return;
-        }
+        _volumeMenu?.Update();
+
+        //Rocks animation
+        _rockLightsAnim.Update();
+        _littleRockLightsAnim.Update();
 
         ServiceLocator.Get<MyCamera>().Target = ServiceLocator.Get<GameParameters>().Window.Size / 2;
         ServiceLocator.Get<BackGroundManager>().Update();
@@ -98,9 +99,11 @@ public class SceneMenu : Scene
         //Rock
         DrawTexturePro(_rock, new Rectangle(Vector2.Zero, new Vector2(_rock.Width, _rock.Height)), _rockRect, Vector2.Zero, 0, Color.White);
         DrawTexturePro(_littleRock, new Rectangle(Vector2.Zero, new Vector2(_littleRock.Width, _littleRock.Height)), _littleRockRect, Vector2.Zero, 0, Color.White);
+        _rockLightsAnim.Draw();
+        _littleRockLightsAnim.Draw();
 
         //Titre
-        DrawTextEx(UIManager.TitleFont, _titleText, _titlePos, UIManager.TitleFont.BaseSize * _titleScale, 1, new(0, 255, 255));
+        DrawTextEx(UIManager.TitleFont, _titleText, _titlePos, UIManager.TitleFont.BaseSize * _titleScale, 1, new(0.1f, 0.9f, 0.9f));
 
         //Buttons
         foreach (LevelButton lButton in _buttons)
@@ -220,13 +223,18 @@ public class SceneMenu : Scene
         //Images du rock
         _rock = LoadTexture("images/menuRock.png");
         _rockRect = new Rectangle(Vector2.Zero, new Vector2(_rock.Width, _rock.Height));
-        _rockRect.Size *= Tools.GetScaleRectSizeInParent_InWhole(_rockRect.Size, vWindow.Size) * 0.95f;
+        float vScale = Tools.GetScaleRectSizeInParent_InWhole(_rockRect.Size, vWindow.Size) * 0.95f;
+        _rockRect.Size *= vScale;
         _rockRect.Position = Vector2.UnitX * (vWindow.Size.X - _rockRect.Size.X);
 
         //Zone de disposition des boutons sur le rock
         _rockRectLayout = _rockRect;
         _rockRectLayout.Size = _rockRect.Size * new Vector2(0.63f, 0.44f);
         _rockRectLayout.Position += new Vector2(82, 181);
+
+        //Lights animation
+        _rockLightsAnim = new Sprite("images/rockLightsAnim.png", _rockRect.Position, 6, 10);
+        _rockLightsAnim.Scale = vScale * Vector2.One;
     }
 
     void InitLittleRockImage()
@@ -235,17 +243,21 @@ public class SceneMenu : Scene
         _littleRock = LoadTexture("images/menuLittleRock.png");
         _littleRockRect = new Rectangle(Vector2.Zero, new Vector2(_littleRock.Width, _littleRock.Height));
         //Même hauteur que le grand rock
-        _littleRockRect.Size *= _rockRect.Size.Y / _littleRockRect.Size.Y * 0.9f;
+        float vScale = _rockRect.Size.Y / _littleRockRect.Size.Y * 0.9f;
+        _littleRockRect.Size *= vScale;
         _littleRockRect.Position = new Vector2(_rockRect.Position.X - _littleRockRect.Size.X * 0.85f, _rockRect.Position.Y + _rockRect.Size.Y / 2 - _littleRockRect.Size.Y / 2 + 50);
+        //Lights animation
+        _littleRockLightsAnim = new Sprite("images/littleRockLightsAnim.png", _littleRockRect.Position, 6, 10);
+        _littleRockLightsAnim.Scale = vScale * Vector2.One;
     }
 
     void InitTitle()
     {
-        _titleText = "A  B\nr  e\nc  a\nh  t\ne\no";
+        _titleText = "A\nr\nc\nh\ne  b\no e\n    a\n    t";
         _titleScale = 1.2f;
         _titlePos = _littleRockRect.Position + _littleRockRect.Size / 2
             - MeasureTextEx(UIManager.TitleFont, _titleText, UIManager.TitleFont.BaseSize, 1) * _titleScale / 2
-            + new Vector2(10, 10);
+            + new Vector2(15, 0);
     }
 }
 

@@ -31,7 +31,7 @@ public static class CellDefinition
 
     /* Mode d'emploi Id :
        Premier Digit - type de cellule, dans l'ordre : 
-           0 - Vide ; 1- ground, 2 - Start, 3 - End ; 4- ClosedTrapDoor 5 - OppenningTrapDoor ; 6 - Wall 
+           0 - Vide ; 1- ground, 2 - Start, 3 - End ; 4- ClosedTrapDoor 5 - OppenningTrapDoor ; 6 - Wall ; 7- checkPoint
        Second Digit - Forme de la Cellule : 
            0 - Carré plein, 1 - Pont centre, 2 - Pont Gauche, 3 - Pont Droit
     */
@@ -52,7 +52,7 @@ public static class CellDefinition
             case 13:
                 return _tiles[18];
             case 20:
-                return _tiles[19];
+                return _tiles[138];
             case 21:
                 return _tiles[17];
             case 22:
@@ -60,7 +60,7 @@ public static class CellDefinition
             case 23:
                 return _tiles[18];
             case 30:
-                return _tiles[19];
+                return _tiles[137];
             case 31:
                 return _tiles[17];
             case 32:
@@ -92,7 +92,7 @@ public static class CellDefinition
             case 63:
                 return _tiles[108];
             case 70:
-                return _tiles[19];
+                return _tiles[139];
             default:
                 return _tiles[0];
         }

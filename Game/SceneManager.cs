@@ -54,6 +54,7 @@ public class SceneManager
     public void UnblockNextLevel()
     {
         string vNextLevelId = Levels[CurrentScene.LevelId].NextLevelID;
+        if(vNextLevelId=="")return;
         LevelInfo vNextLevel = Levels[vNextLevelId];
         vNextLevel.IsBlocked = false;
         Levels[vNextLevelId] = vNextLevel;

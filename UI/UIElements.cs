@@ -110,7 +110,7 @@ public class Slider
         SliderRect = pSliderRect;
         _fillerRect = new Rectangle(SliderRect.Position, new Vector2(SliderRect.Size.X * pValue, SliderRect.Size.Y));
         _handleRect = new Rectangle(SliderRect.Position + new Vector2(SliderRect.Size.X * pValue, SliderRect.Size.Y / 2 - SliderRect.Size.Y * 1.1f / 2),
-            new Vector2(SliderRect.Size.X / 50, SliderRect.Size.Y * 1.1f));
+            new Vector2(SliderRect.Size.X / 20, SliderRect.Size.Y * 1.1f));
     }
 
     public void MoveSlider(Vector2 pDelta)
@@ -481,13 +481,13 @@ public class PausePannel
         _sizeTitle = MeasureTextEx(_font, _title, _font.BaseSize, 1) * _textScale;
         _posTitle = _pannel.Position + (_pannel.Size / 2 - _sizeTitle / 2) * Vector2.UnitX + 30 * Vector2.UnitY;
 
-        Vector2 vButtonSize = _pannel.Size / 3;
-        _volumeButton = new Button(_pannel.Position + _pannel.Size / 2 + new Vector2(-vButtonSize.X - 20, 30), vButtonSize, "Volume Options");
+        
+        _volumeButton = new Button(_pannel.Position + _pannel.Size / 2 + new Vector2(84, 62), new Vector2(64,64), "");
         _volumeButton.TextColor = new(200, 100, 0);
-        _backMenuButton = new Button(_pannel.Position + _pannel.Size / 2 + new Vector2(20, 30), vButtonSize, "Back To Menu");
+        _volumeButton.SetTextures(LoadTexture("images/AudioButtonPressed.png"), LoadTexture("images/AudioButtonUnpressed.png"));
+        Vector2 vButtonSize = _pannel.Size / 3;
+        _backMenuButton = new Button(_pannel.Position + _pannel.Size / 2 + new Vector2(-vButtonSize.X - 20, 30), vButtonSize, "Menu");
         _backMenuButton.TextColor = new(200, 100, 0);
-        _backMenuButton.TextScale = MathF.Min(_backMenuButton.TextScale, _volumeButton.TextScale);
-        _volumeButton.TextScale = _backMenuButton.TextScale;
 
         _quitButton = new Button(_pannel.Position, new Vector2(40, 40), "X");
 

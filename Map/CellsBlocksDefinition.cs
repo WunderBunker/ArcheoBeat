@@ -5,15 +5,17 @@ using Raylib_cs;
 public static class CellsBlocksDefinition
 {
     //Taille d'un block en nombre de cellules
-    public static Vector2 BlockSizeInCells = new Vector2(3, 3);
+    public static readonly Vector2 BlockSizeInCells = new Vector2(3, 3);
 
     //Rectangle de Texture correspondant au dessous d'un block (cf tileSheet dans CellDefinition)
-    public static Rectangle BlockFrameDownRectTex = new Rectangle(new Vector2(8, 1) * CellDefinition.Tilesize, BlockSizeInCells * CellDefinition.Tilesize);
+    public static readonly Rectangle BlockFrameDownRectTex = new Rectangle(new Vector2(8, 1) * CellDefinition.Tilesize, BlockSizeInCells * CellDefinition.Tilesize);
+    public static readonly Rectangle BrokenBlockFrameDownRectTex = new Rectangle(new Vector2(11.5f, 1) * CellDefinition.Tilesize, BlockSizeInCells * CellDefinition.Tilesize);
     //Rectangle de Texture correspondant au dessus d'un block (cf tileSheet dans CellDefinition)
-    public static Rectangle BlockFrameUpRectTex = new Rectangle(new Vector2(8, 4.1f) * CellDefinition.Tilesize, (BlockSizeInCells + Vector2.UnitY) * CellDefinition.Tilesize);
+    public static readonly Rectangle BlockFrameUpRectTex = new Rectangle(new Vector2(8, 4.1f) * CellDefinition.Tilesize, (BlockSizeInCells + Vector2.UnitY) * CellDefinition.Tilesize);
+    public static readonly Rectangle BrokenBlockFrameUpRectTex = new Rectangle(new Vector2(11.5f, 4.1f) * CellDefinition.Tilesize, (BlockSizeInCells + Vector2.UnitY) * CellDefinition.Tilesize);
 
     //Matrices de compatibilité des types de block (comprendre block de type i peut avoir pour voisin de gauche les types dans LeftCompatibilityMatrix[i] )
-    public static int[][] LeftIncompatibilityMatrix =
+    public static readonly int[][] LeftIncompatibilityMatrix =
     {
         //0
         [1,3,6,8,10,18,20],
@@ -60,7 +62,7 @@ public static class CellsBlocksDefinition
         //21
         []
     };
-    public static int[][] TopIncompatibilityMatrix =
+    public static readonly int[][] TopIncompatibilityMatrix =
     {
         //0
         [1],
@@ -113,11 +115,11 @@ public static class CellsBlocksDefinition
     //Definition des différents types de blocks et des cellules qui les composent
     /* Mode d'emploi Cells Id :
         Premier Digit - type de cellule, dans l'ordre : 
-            0 - Vide ; 1- ground, 2 - Start, 3 - End ; 4- ClosedTrapDoor 5 - OppenningTrapDoor ; 6 - obstacles 
+            0 - Vide ; 1- ground, 2 - Start, 3 - End ; 4- ClosedTrapDoor 5 - OppenningTrapDoor ; 6 - obstacles ; 7- checkPoint
         Second Digit - Forme de la Cellule : 
             0 - Carré plein, 1 - Pont centre, 2 - Pont Gauche, 3 - Pont Droit
     */
-    public static int[][] Blocks =
+    public static  readonly int[][] Blocks =
     {
         //0
         [

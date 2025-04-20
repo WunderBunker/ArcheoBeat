@@ -81,6 +81,7 @@ public class Cell
                 _anims = null;
                 break;
             case 7:
+                if (_anims == null) return;
                 Sprite.RemoveOrderedSprite(_anims[0], 0);
                 Sprite.RemoveOrderedSprite(_anims[1], 1);
                 _anims = null;
@@ -121,7 +122,7 @@ public class Cell
                 break;
             case 7:
                 if (_anims != null) return;
-                
+
                 ServiceLocator.Get<MapManager>().StartingCell = CellIndexInGrid;
                 _anims = [
                     new("images/startBackAnim.png", Grid.GetCellPosition(CellIndexInGrid),4, 10),

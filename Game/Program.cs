@@ -12,6 +12,7 @@ public class ArcheoBeat
         //Initialisation de la fenêtre
         GameParameters vGP = ServiceLocator.Get<GameParameters>();
         SetTargetFPS(vGP.TargetFPS);
+        SetTextLineSpacing(-20);
         vGP.Window.InitialiserWindow();
 
         //Chargement de la scène du menu des niveaux
@@ -31,6 +32,7 @@ public class ArcheoBeat
             ClearBackground(Color.DarkPurple);
             ServiceLocator.Get<SceneManager>().CurrentScene.Draw();
             EndTextureMode();
+            
             //Ecran
             BeginDrawing();
             ClearBackground(Color.DarkGray);
@@ -60,6 +62,7 @@ public class ArcheoBeat
         vCamera.Zoom = 1;
         ServiceLocator.Register(vCamera);
         ServiceLocator.Register<MeasureTool>();
+
     }
 
 }

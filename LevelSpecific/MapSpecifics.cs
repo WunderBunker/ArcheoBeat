@@ -58,6 +58,17 @@ public static class MapSpecifics
 {
 
     public static MapSpecific L1 = new
+       (
+           new Vector2(5, 3),
+           new int[,]{
+            {11, 0,  20,  19, 18},
+            {13, 13, 13,  1, 7},
+            {13, 12, -1, -1, 13}},
+           null,
+           null
+       );
+
+    public static MapSpecific L2 = new
     (
         new Vector2(5, 5),
         new int[,]{
@@ -71,16 +82,16 @@ public static class MapSpecifics
     );
 
 
-    public static MapSpecific L2 = new
+    public static MapSpecific L3 = new
     (
         new Vector2(8, 8),
         new int[,]{
-        {11, 14, 18, 13, 13, 13,13},
+        {11, 14, 1, 13, 13, 13,13},
         {13, 13, 2,  13, 13, 13,13},
-        {13, -1, 9,  -1, 13, 13,13},
-        {13, 21, -1, -1, 0,  -1,13},
-        {13, 3,  13, 2,  13, -1,13},
-        {13, -1, -1, -1, 8,  10,13},
+        {13, 13, 9,  13, 13, 13,13},
+        {13, 13, -1, -1, 21, -1,13},
+        {13, 13,  13, 13, 13, -1,13},
+        {13, 13, 13, 13, 13,  10,13},
         {13, 13, 13, 13, 13, -1,13},
         {13, 13, 13, 13, 12, -1,13},
         },
@@ -96,7 +107,7 @@ public static class MapSpecifics
         {false, false, false, false, false,false,true,false},}
     );
 
-    public static MapSpecific L3 = new
+    public static MapSpecific L4 = new
     (
         new Vector2(7, 5),
         new int[,]{
@@ -116,7 +127,7 @@ public static class MapSpecifics
         {false, false, false, false, false,false,false},}
     );
 
-    public static MapSpecific L4 = new
+    public static MapSpecific L5 = new
     (
         new Vector2(10, 3),
         new int[,]{
@@ -129,7 +140,7 @@ public static class MapSpecifics
         {null, null, null,                  null, null, null,                 null ,null, null,                  null}},
         null
     );
-    public static MapSpecific L5 = new
+    public static MapSpecific L6 = new
     (
         new Vector2(8, 8),
         new int[,]{
@@ -161,70 +172,52 @@ public static class MapSpecifics
         {false, false, false, false, false,true,false,false},
         {false, false, false, false, false,false,false, false},}
     );
-    public static MapSpecific L6 = new
-    (
-        new Vector2(5, 5),
-        new int[,]{
-        {11, -1, -1, -1, -1},
-        {-1, -1, 10, -1, -1},
-        {-1, -1, -1, -1, -1},
-        {-1, -1, -1, -1, -1},
-        {-1, -1, -1, -1, 12}},
-        new (byte, Vector2)?[,]{
-        {null, (1,new Vector2(2,4)), null,                 null, null},
-        {null, (3,new Vector2(1,3)), null,                 null, null},
-        {null, (2,new Vector2(5,3)), (4,new Vector2(6,6)), null, null},
-        {null, null,                 null,                 null, null},
-        {null, null,                 null,                 null, null}},
-        new bool[,]{
-        {false, false, false, false, false},
-        {true, false, true, false, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false}}
-    );
     public static MapSpecific L7 = new
     (
         new Vector2(5, 5),
         new int[,]{
         {11, -1, -1, -1, -1},
-        {-1, -1, 10, -1, -1},
+        {-1, -1, -1, -1, -1},
         {-1, -1, -1, -1, -1},
         {-1, -1, -1, -1, -1},
         {-1, -1, -1, -1, 12}},
-        new (byte, Vector2)?[,]{
-        {null, (1,new Vector2(2,4)), null,                 null, null},
-        {null, (3,new Vector2(1,3)), null,                 null, null},
-        {null, (2,new Vector2(5,3)), (4,new Vector2(6,6)), null, null},
-        {null, null,                 null,                 null, null},
-        {null, null,                 null,                 null, null}},
+        null,
         new bool[,]{
         {false, false, false, false, false},
-        {true, false, true, false, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false},
+        {true, false, true, false, true},
+        {false, true, false, true, false},
+        {false, true, true, true, false},
         {false, false, false, false, false}}
     );
     public static MapSpecific L8 = new
     (
-        new Vector2(5, 5),
+        new Vector2(8, 8),
         new int[,]{
-        {11, -1, -1, -1, -1},
-        {-1, -1, 10, -1, -1},
-        {-1, -1, -1, -1, -1},
-        {-1, -1, -1, -1, -1},
-        {-1, -1, -1, -1, 12}},
+        {11, -1, 13, 13, 13, 13, 13, 13},
+        {13, -1, -1, 13, -1, 13, -1, -1},
+        {13, 13, -1, 13, -1, 13, -1, 13},
+        {13, 13, 21, -1, -1, 13, -1, 13},
+        {13, 13, -1, 13, 13, 13, -1, 13},
+        {-1, -1, 21, -1, -1, 21, -1, 13},
+        {-1, 13, 13, 13, 13, -1, 13, 13},
+        {-1, 13, 13, 13, 13, -1, -1, 12}},
         new (byte, Vector2)?[,]{
-        {null, (1,new Vector2(2,4)), null,                 null, null},
-        {null, (3,new Vector2(1,3)), null,                 null, null},
-        {null, (2,new Vector2(5,3)), (4,new Vector2(6,6)), null, null},
-        {null, null,                 null,                 null, null},
-        {null, null,                 null,                 null, null}},
+        {null, null, null,                  null, null,null,                  null, null},
+        {null, null, null,                  null, null,null,                  null, null},
+        {null, null, null,                  null, null,null,                  null, null},
+        {null, null, (2,new Vector2(13,3)), null, null,null,                  null, null},
+        {null, null, null,                  null, null,null,                  null, null},
+        {null, null, (1,new Vector2(0,23)),  null, null,(2,new Vector2(21,4)), null, null},
+        {null, null, null,                  null, null,null,                  null, null},
+        {null, null, null,                  null, null,null,                  null, null}},
         new bool[,]{
-        {false, false, false, false, false},
-        {true, false, true, false, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false}}
+        {false, false, false, false, false,false, false, false},
+        {false, true, false, false, false,false, true, true},
+        {false, false, true, false, false,false, true, false},
+        {false, false, false, false, false,false, true, false},
+        {false, false, false, false, false,false, false, false},
+        {true, false, false, true, true,false, false, false},
+        {true, false, false, false, false,true, false, false},
+        {true, false, false, false, false,false, false, false}}
     );
 }
