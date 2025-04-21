@@ -277,7 +277,7 @@ public class Player : IDisposable
         Sprite.AddCallBack(vCallBack, 9);
 
         //Bruit de disfonctionnement
-        ServiceLocator.Get<AudioManager>().PlaySoundFx(FXSounds.PlayerBreakSound);
+        ServiceLocator.Get<AudioManager>().PlaySoundFx(FXSounds.PlayerBreakSound,0.5f);
     }
 
     //Application d'une animation de déplacement

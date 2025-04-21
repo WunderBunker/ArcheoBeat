@@ -49,6 +49,7 @@ public class SceneLevel : Scene
         Sprite.DrawOrderedSprites(1);
         ServiceLocator.Get<ScissorsManager>().Draw();
         ServiceLocator.Get<TempAnimManager>().Draw();
+        ServiceLocator.Get<BackGroundManager>().DrawFrontGround();
 
         EndMode2D();
 
@@ -91,6 +92,7 @@ public class SceneLevel : Scene
         vBGManager.AddBackGround("Images/fog.png", 0.8f, Vector2.UnitX * 15, Vector2.Zero, new(142, 98, 204, 0.5f));
         vBGManager.AddBackGround("Images/background2.png", 0.8f, Vector2.Zero, Vector2.Zero, new(242, 94, 209));
         vBGManager.AddBackGround("Images/background2.png", 0.3f, Vector2.Zero, Vector2.One * 100, new(94, 175, 242));
+        vBGManager.AddFrontGround("Images/FrontSky.png", -0.1f, Vector2.UnitX * 30, Vector2.One * 100, new(0.37f, 0.69f, 0.95f, 0.75f));
     }
 
     protected override void OnEchap()
