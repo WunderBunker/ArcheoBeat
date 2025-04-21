@@ -1,1 +1,1 @@
-Read ArcheoBeat_DocumentationTechnique.pd for details
+Read ArcheoBeat_DocumentationTechnique.pdf for details
