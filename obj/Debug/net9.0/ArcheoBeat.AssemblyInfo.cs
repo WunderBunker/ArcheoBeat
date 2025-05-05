@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArcheoBeat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3df4d40d9e93243a00b874433f7490b876a918df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+87b9b5d7eb6409943ee6ddf98875c4decbbe850c")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArcheoBeat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArcheoBeat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -17,7 +17,7 @@ public class ArcheoBeat
 
         //Chargement de la scène du menu des niveaux
         ServiceLocator.Get<SceneManager>().LoadScene<SceneMenu>("");
-
+        
 
         //RAYLOOP
         while (!vGP.ShouldClose)
