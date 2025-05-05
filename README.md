@@ -1,0 +1,1 @@
+Read ArcheoBeat_DocumentationTechnique.pdf for details
